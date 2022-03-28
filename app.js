@@ -31,20 +31,17 @@ app.post("/", (req, res) => {
       email_address: email,
       merge_fields: {FNAME: firstName,LNAME: lastName,},
       status: "subscribed",
-    });
-
-    // getting unexpected crash here when trying to register duplicate email
-    try {
+    })
+      console.log(response)
+    // getting crash here when trying to register duplicate email - how to catch it?
         if(response.status === "subscribed"){
             console.log("Email added to newsletter");
             res.sendFile(`${__dirname}/success.html`)
-        } else {
+        }
+         else {
             console.log(response.title, response.type);
             res.sendFile(`${__dirname}/failure.html`)
-        }}
-    catch(err) {
-        console.log(err.message)
-    }
+        }
   };
   addEmail();
 });
